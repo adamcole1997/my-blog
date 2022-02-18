@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { compose, createStore , applyMiddleware} from 'redux';
 import { rootReducer } from './redux/rootReducer';
 import thunk from 'redux-thunk';
-import { sagaWatcher, sagaWatcherId } from './redux/sagas';
+import { sagaWatcher, sagaWatcherId,sagaWatcherComments } from './redux/sagas';
 
 const saga = createSagaMiddleware()
 
@@ -21,6 +21,7 @@ const store = createStore(rootReducer,compose(
 ))
 saga.run(sagaWatcher)
 saga.run(sagaWatcherId)
+saga.run(sagaWatcherComments)
 
 const app = (
   <ChakraProvider> 

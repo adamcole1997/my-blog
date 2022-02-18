@@ -11,7 +11,7 @@ const Post = ({post}) => {
       <Text maxWidth='303px' align="center" mt={5}>{post.description}</Text>
       <Text mt={5}>{post.dateCreated}</Text>
       </Link>
-      <Box ><Link to='comments/CommentPage'>Комментарии</Link></Box>
+      <Box ><Link   to={`comments/CommentPage/${post._id}`}>Комментарии</Link></Box>
       </Box> ;
 };
 

@@ -7,6 +7,9 @@ export function* sagaWatcher() {
 }
 export function* sagaWatcherId() {
   yield takeEvery(UPLOAD_POST, sagaWorkerPost)
+}
+export function* sagaWatcherComments() {
+  yield takeEvery(GET_COMMENTS, sagaWorkerComments)
   }
 
 export function* sagaWorker(action) {
@@ -26,6 +29,15 @@ export function* sagaWorkerPost(action) {
     yield put('Что-то пошло не так')
   }
 }
+export function* sagaWorkerComments(action) {
+  console.log(action);
+  try {
+    const payload = yield call(Comments, action.payload)
+    yield put({ type: GET_COMMENTS_SUCCESS, payload,})
+  } catch (e) {
+    yield put('Что-то пошло не так')
+  }
+}
 
 async function fetchPosts({ perPage, currentPage, search }) {
   const response = await fetch(`http://test-blog-api.ficuslife.com/api/v1/posts?limit=${perPage}&skip=${currentPage}${search ? `&search=${search}` : "" }`)
@@ -34,5 +46,10 @@ async function fetchPosts({ perPage, currentPage, search }) {
 }
 export async function Post(id) {
   const response = await fetch(`http://test-blog-api.ficuslife.com/api/v1/posts/${id}`)
+  return await response.json()
+} 
+export async function Comments(id) {
+  const response = await fetch(`http://test-blog-api.ficuslife.com/api/v1/comments/post/${id}`)
+  console.log(response);
   return await response.json()
 } 

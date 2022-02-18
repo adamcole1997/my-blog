@@ -11,6 +11,7 @@ const FetchedPosts = () => {
   const posts = useSelector(state=>state.posts.fetchedPosts)
   const currentPage = useSelector(state=>state.posts.currentPage)
   const perPage = useSelector(state=>state.posts.perPage)
+  console.log(posts);
   useEffect(()=>{
     dispatch(fetchPost({currentPage, perPage}))
   },[currentPage])

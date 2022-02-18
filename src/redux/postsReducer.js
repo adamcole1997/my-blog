@@ -1,4 +1,4 @@
-import { FETCH_POSTS, SEARCH_POST, SET_CURRENT_PAGE, UPLOAD_POST_SUCCESS } from "./types";
+import { FETCH_POSTS, GET_COMMENTS_SUCCESS, SEARCH_POST, SET_CURRENT_PAGE, UPLOAD_POST_SUCCESS } from "./types";
 
 const initialState = {
     posts: [],
@@ -8,6 +8,7 @@ const initialState = {
     total:300,
     searchValue:'',
     post:'', 
+    comment:''
 }
 
 export const postsReducer =(state=initialState,action) => {
@@ -20,6 +21,8 @@ export const postsReducer =(state=initialState,action) => {
             return {...state,searchValue:action.payload}
         case UPLOAD_POST_SUCCESS:
             return {...state,post:action.payload}
+        case GET_COMMENTS_SUCCESS:
+            return {...state,comment:action.payload}    
         default:return state
     }
     

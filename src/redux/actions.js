@@ -20,16 +20,27 @@ export const searchPost = (searchValue) => {
     }
 }
 export function PostId(post) {
-    console.log(post);
     return {
         type:UPLOAD_POST,
         payload: post
     }
 }
 export function PostIdSuccess(post) {
-    console.log(post);
     return {
         type:UPLOAD_POST_SUCCESS,
         payload: post
+    }
+}
+export const getComments = (id) => {
+    return {
+        type:GET_COMMENTS,
+        payload: id
+    }
+}
+export const getCommentsSuccess = (id) => {
+    console.log(id);
+    return {
+        type:GET_COMMENTS_SUCCESS,
+        payload: id
     }
 }

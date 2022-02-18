@@ -30,6 +30,9 @@ const Header = () => {
           <Link to='/' className='link_navbar'>
             Users
           </Link>
+          <Link to='pages/LoginPage' className='link_navbar'>
+            Войти
+          </Link>
         </Flex>
       </Container>
     </Box>
