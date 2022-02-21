@@ -1,7 +1,7 @@
-import { Box, Button, Container, Flex, Input } from '@chakra-ui/react'
+import { Box,  Container, Flex, Input } from '@chakra-ui/react'
 import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchPost, searchPost } from '../redux/actions'
+import { fetchPost } from '../redux/actions'
 import { Link } from 'react-router-dom';
 
 const Header = () => {
@@ -30,8 +30,8 @@ const Header = () => {
           <Link to='/' className='link_navbar'>
             Users
           </Link>
-          <Link to='pages/LoginPage' className='link_navbar'>
-            Войти
+          <Link to='pages/RegistrationPage' className='link_navbar'>
+            Sign up
           </Link>
         </Flex>
       </Container>

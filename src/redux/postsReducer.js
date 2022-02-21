@@ -1,4 +1,4 @@
-import { FETCH_POSTS, GET_COMMENTS_SUCCESS, SEARCH_POST, SET_CURRENT_PAGE, UPLOAD_POST_SUCCESS } from "./types";
+import { CREATE_EMAIL_NEW_USER, CREATE_PASSWORD_NEW_USER, FETCH_POSTS, GET_COMMENTS_SUCCESS, SEARCH_POST, SET_CURRENT_PAGE, UPLOAD_POST_SUCCESS } from "./types";
 
 const initialState = {
     posts: [],
@@ -8,7 +8,11 @@ const initialState = {
     total:300,
     searchValue:'',
     post:'', 
-    comment:''
+    comment:'',
+    data:{
+        email: '',
+        password: ''
+    },
 }
 
 export const postsReducer =(state=initialState,action) => {
@@ -23,6 +27,10 @@ export const postsReducer =(state=initialState,action) => {
             return {...state,post:action.payload}
         case GET_COMMENTS_SUCCESS:
             return {...state,comment:action.payload}    
+        case CREATE_EMAIL_NEW_USER:
+            return {...state,email:action.payload}    
+        case CREATE_PASSWORD_NEW_USER:
+            return {...state,password:action.payload}    
         default:return state
     }
     
