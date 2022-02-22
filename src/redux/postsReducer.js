@@ -1,4 +1,4 @@
-import { CREATE_EMAIL_NEW_USER, CREATE_PASSWORD_NEW_USER, FETCH_POSTS, GET_COMMENTS_SUCCESS, SEARCH_POST, SET_CURRENT_PAGE, UPLOAD_POST_SUCCESS } from "./types";
+import { CREATE_EMAIL_NEW_USER, CREATE_NEW_USER, CREATE_PASSWORD_NEW_USER, FETCH_POSTS, GET_COMMENTS_SUCCESS, SEARCH_POST, SET_CURRENT_PAGE, UPLOAD_POST_SUCCESS } from "./types";
 
 const initialState = {
     posts: [],
@@ -9,13 +9,13 @@ const initialState = {
     searchValue:'',
     post:'', 
     comment:'',
-    data:{
-        email: '',
-        password: ''
-    },
+    email: '',
+    password: '',
+    User:{}
 }
 
 export const postsReducer =(state=initialState,action) => {
+console.log(state);
     switch (action.type) {
         case FETCH_POSTS:
             return {...state,fetchedPosts:action.payload.data}
@@ -31,6 +31,8 @@ export const postsReducer =(state=initialState,action) => {
             return {...state,email:action.payload}    
         case CREATE_PASSWORD_NEW_USER:
             return {...state,password:action.payload}    
+        case CREATE_NEW_USER:
+            return {...state,newUser:action.payload}    
         default:return state
     }
     

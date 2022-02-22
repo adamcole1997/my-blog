@@ -7,6 +7,7 @@ import Header from './components/header';
 import PaginationPage from './components/PaginationPage';
 import RegistrationPage from './pages/RegistrationPage';
 import Post_page from './pages/Post_page';
+import UserPage from './pages/UserPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="pages/:postId" element={<Post_page />} />
         <Route path="comments/CommentPage/:postId" element={<CommentPage />} />
         <Route path="pages/RegistrationPage" element={<RegistrationPage />} />
+        <Route path="pages/UserPage" element={<UserPage />} />
       </Routes>
     </BrowserRouter>
     </div>

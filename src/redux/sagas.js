@@ -1,6 +1,13 @@
 
-import {takeEvery, put, call} from 'redux-saga/effects'
+import {takeEvery, put, call, all} from 'redux-saga/effects'
 import {CREATE_NEW_USER, CREATE_NEW_USER_SUCCESS, FETCH_POSTS,GET_COMMENTS,GET_COMMENTS_SUCCESS,REQUEST_POSTS, UPLOAD_POST, UPLOAD_POST_SUCCESS} from './types'
+
+
+
+
+
+
+
 
 // Загрузка постов
 
@@ -73,17 +80,43 @@ export async function Comments(id) {
 
 
 export function* sagaWatcherNewUser() {
-  yield takeEvery(CREATE_NEW_USER_SUCCESS, sagaWorker)
+  yield takeEvery(CREATE_NEW_USER_SUCCESS, sagaWorkerNewUser)
 }
 export function* sagaWorkerNewUser(action) {
-  try {
-    const payload = yield call(CreateNewUser, action.payload)
-    yield put({ type: CREATE_NEW_USER, payload,})
+    let payload = yield call(CreateNewUser, action.payload)
+      yield put({ type: CREATE_NEW_USER, payload})
+    console.log("WORKER", payload);
+
+}
+async function CreateNewUser(data) {
+
+  try{
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      body: JSON.stringify(data)
+    }
+    const response = await fetch('http://test-blog-api.ficuslife.com/api/v1/users', requestOptions)
+    const responseObject = await response.json()
+    const token = await fetch('http://test-blog-api.ficuslife.com/api/v1/auth',requestOptions)
+    const tokenObject = await token.json()
+    const tokenValue = await Object.values(tokenObject).toString()
+    localStorage.setItem("token", tokenValue);
+    console.log('sdjfgn', typeof tokenValue);
+    return responseObject
   } catch (e) {
-    yield alert('Что-то пошло не так')
+    alert('Что-то пошло не так', e)
   }
 }
-async function CreateNewUser({data}) {
-  const response = await fetch('http://test-blog-api.ficuslife.com/api/v1/users')
-  return await response.json()
+
+
+export default function* rootSaga () {
+  yield all([
+    sagaWatcher(),
+    sagaWatcherId(),
+    sagaWatcherComments(),
+    sagaWatcherNewUser()
+  ])
 }

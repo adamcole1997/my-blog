@@ -43,6 +43,13 @@ export const getCommentsSuccess = (id) => {
         payload: id
     }
 }
+export const createNewUser = ({data}) => {
+    console.log("data");
+    return {
+        type:CREATE_NEW_USER,
+        payload: {...data}
+    }
+}
 export const createEmailUser = (data) => {
     return {
         type:CREATE_EMAIL_NEW_USER,
@@ -55,9 +62,13 @@ export const createPasswordUser = (data) => {
         payload: data
     }
 }
-export const createUserSuccess = (data) => {
+export const createUserSuccess = (email,password) => {
+    // console.log(email,password);
     return {
         type:CREATE_NEW_USER_SUCCESS,
-        payload: data
+        payload: {
+            email: email,
+            password: password
+        }
     }
 }
